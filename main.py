@@ -7,6 +7,7 @@ from Crypto.Util.Padding import pad, unpad
 import base64
 from collections import defaultdict
 import time
+import os
 
 app = Flask(__name__)
 
@@ -1265,4 +1266,7 @@ def manual():
         return render_template_string(MANUAL_HTML, jwt=jwt, error=str(e), result=None)
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=5000)
+    app.run(
+        host='0.0.0.0',
+        port=int(os.environ.get("PORT", 5000))
+    )
